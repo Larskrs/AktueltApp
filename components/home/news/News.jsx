@@ -1,15 +1,18 @@
 import React, {useRef, useState, useEffect} from 'react';
 import Carousel, {ParallaxImage} from 'react-native-snap-carousel';
 import {
-  Image,
   View,
   Text,
   Dimensions,
   StyleSheet,
   TouchableOpacity,
   Platform,
+  Linking,
 } from 'react-native';
 import styles from "./News.style";
+import useFetch from '../../../hook/useFetch';
+import { useRouter } from 'expo-router';
+import { Image } from "expo-image"
 
 const windowDimensions = Dimensions.get('window');
 const screenDimensions = Dimensions.get('screen');
@@ -33,18 +36,31 @@ const News = () => {
     });
     
     
-    const data = [
-        {title: "Desperados, Banditos & Litagos - Kommer Desember 2023", thumbnail: "https://i.gyazo.com/8a452238e47a596ad2558bb71369bac1.gif"},
-        {title: "Papparau - Ny Episode", thumbnail: "http://aktuelt.tv/_next/image?url=https%3A%2F%2Fgyazo.com%2Ff12284bee733a43ccbda32243e30363e.jpg&w=3840&q=75"},
+    // const data = [
+    //     {title: "Desperados, Banditos & Litagos - Kommer Desember 2023", thumbnail: "https://i.gyazo.com/8a452238e47a596ad2558bb71369bac1.gif"},
+    //     {title: "Papparau - Ny Episode", thumbnail: "http://aktuelt.tv/_next/image?url=https%3A%2F%2Fgyazo.com%2Ff12284bee733a43ccbda32243e30363e.jpg&w=3840&q=75"},
         
-    ]
+    // ]
+
+    const { data, isLoading, error, refresh} = useFetch(
+        `/media/series`, {});
+
+        const blurhash =
+        '|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[';
+      
 
     const renderItem = (item) => {
+
+        const router = useRouter();
+
         return (
-            <View style={styles.item(screenDimensions.width)}>
+            <View style={styles.item(screenDimensions.width)} onPress={() => {router.push("/series/" + item.id)}}>
                 <Image
-                    source={{uri: item.thumbnail}}
+                    source={item?.thumbnails?.[0]}
                     style={styles.imageContainer}
+                    focusable={false}
+
+                    
                 />
                 <Text style={styles.title} numberOfLines={2}>
                     { item.title }
@@ -54,8 +70,11 @@ const News = () => {
     }
 
     return (
-        <View style={styles.container}>
-            <Carousel
+        <View>
+
+            <Text style={styles.pageTitle}>Videoer</Text>
+            <View style={styles.container}>
+                <Carousel
                 ref={carouselRef}
                 layout={'default'}
                 data={data}
@@ -64,18 +83,10 @@ const News = () => {
                 itemHeight={250}
                 itemWidth={screenDimensions.width}
                 renderItem={({item}) => renderItem(item)}
-                hasParallaxImages={true}
                 loop={true}
                 autoplay={true}
-                autoplayInterval={5000}
-                autoplayDelay={5000}
-                automaticallyAdjustContentInsets={true}
-                indicatorStyle={"white"}
-                fadingEdgeLength={0.5}
-                enableMomentum={true}
-                snapToAlignment={"center"}
-                scrollEnabled={true}
-            />
+                />
+        </View>
         </View>
     )
 }

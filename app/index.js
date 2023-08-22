@@ -6,6 +6,8 @@ import { COLORS, icons, images, SIZES } from "../constants"
 import ScreenHeaderBtn from "../components/common/header/ScreenHeaderBtn"
 import { StatusBar } from "expo-status-bar";
 
+import useFetch from "../hook/useFetch"
+
 import { News, LatestVideos } from "../components"
 
 const Home = () => {

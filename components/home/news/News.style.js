@@ -17,6 +17,10 @@ const styles = StyleSheet.create({
     zIndex: 2,
     padding: SIZES.large,
   },
+  pageTitle: {
+    fontSize: SIZES.xLarge,
+
+  },
   newsContainer: {
     rowGap: SIZES.medium,
     columnGap: SIZES.medium,
