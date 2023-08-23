@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-import { COLORS, FONT, SHADOWS, SIZES } from "../../../constants";
+import { ASPECTS, COLORS, FONT, SHADOWS, SIZES } from "../../../constants";
 
 const styles = StyleSheet.create({
   container: {
@@ -8,18 +8,25 @@ const styles = StyleSheet.create({
     borderRadius: SIZES.medium,
     maxHeight: 250,
   },
-  title: {
-    fontSize: SIZES.xLarge,
-    color: COLORS.white,
+  info: {
     position: "absolute",
     bottom: 100,
     left: 0,
     zIndex: 2,
     padding: SIZES.large,
   },
+  title: {
+    fontSize: SIZES.xLarge,
+    color: COLORS.white,
+  },
+  description: {
+    fontSize: SIZES.medium,
+    color: COLORS.lightWhite,
+    opacity: 1,
+  },
   pageTitle: {
     fontSize: SIZES.xLarge,
-
+    color: COLORS.white,
   },
   newsContainer: {
     rowGap: SIZES.medium,
@@ -29,8 +36,13 @@ const styles = StyleSheet.create({
   newsWrapper: {
     backgroundColor: "transparent",
     borderRadius: SIZES.medium,
-    padding: SIZES.medium,
-    height: 250,
+    overflow: "hidden",
+    position: "relative",
+
+  },
+  newsSeperator: {
+    width: SIZES.xLarge,
+    padding: SIZES.large,
   },
   item: (screenWidth) => ({
     width: screenWidth - SIZES.medium*2,

@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
     fontFamily: FONT.regular,
     marginVertical: SIZES.small / 1.25,
   },
+  
 });
 
 export default styles;

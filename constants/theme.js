@@ -28,6 +28,7 @@ const FONT = {
 };
 
 const SIZES = {
+  xxSmall: 8,
   xSmall: 10,
   small: 12,
   medium: 16,
@@ -35,6 +36,9 @@ const SIZES = {
   xLarge: 24,
   xxLarge: 32,
 };
+const ASPECTS = {
+  poster(multiplier=4) { return {width: (27*multiplier), height: (40*multiplier)}},
+}
 
 const SHADOWS = {
   small: {
@@ -59,4 +63,4 @@ const SHADOWS = {
   },
 };
 
-export { COLORS, FONT, SIZES, SHADOWS };
+export { COLORS, FONT, SIZES, SHADOWS, ASPECTS };

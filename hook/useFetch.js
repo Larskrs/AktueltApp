@@ -32,7 +32,6 @@ const useFetch = (endpoint, query) => {
       console.log({response})
     } finally {
       setIsLoading(false);
-      console.log({data})
     }
   };
 
