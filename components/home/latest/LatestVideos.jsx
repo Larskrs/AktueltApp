@@ -14,6 +14,7 @@ const About = () => {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.title}>Nyeste Utgaver</Text>
       {!isLoading && <FlatList 
         renderItem={({item}) => renderItem(item)}
         data={data}

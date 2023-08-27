@@ -10,9 +10,10 @@ const styles = StyleSheet.create({
     paddingTop: SIZES.large,
   },
   title: {
-    fontSize: SIZES.xLarge,
+    fontSize: SIZES.large,
     color: COLORS.white,
-    paddingLeft: SIZES.large,
+    margin: 0,
+    padding: SIZES.small,
   },
   contentContainer: {
     columnGap: 8,

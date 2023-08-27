@@ -8,21 +8,40 @@ const styles = StyleSheet.create({
     borderRadius: SIZES.medium,
     maxHeight: 250,
   },
-  info: {
-    position: "absolute",
-    bottom: 100,
-    left: 0,
-    zIndex: 2,
-    padding: SIZES.large,
+  info: ({position, maxWidth=250}) => {
+
+
+    if (position === "bottom")
+    return {
+      position: "absolute",
+      bottom: 100,
+      left: 0,
+      zIndex: 2,
+      padding: SIZES.large,
+      maxWidth: maxWidth,
+    }
+    if (position === "top")
+    return {
+      position: "absolute",
+      top: 0,
+      left: 0,
+      zIndex: 2,
+      padding: SIZES.large,
+      maxWidth: maxWidth,
+    }
   },
   title: {
     fontSize: SIZES.xLarge,
+    fontWeight: "700",
     color: COLORS.white,
+    maxWidth: "inherit",
   },
   description: {
     fontSize: SIZES.medium,
+    fontWeight: "300",
     color: COLORS.lightWhite,
     opacity: 1,
+    maxWidth: "inherit",
   },
   pageTitle: {
     fontSize: SIZES.xLarge,
@@ -35,7 +54,6 @@ const styles = StyleSheet.create({
   },
   newsWrapper: {
     backgroundColor: "transparent",
-    borderRadius: SIZES.medium,
     overflow: "hidden",
     position: "relative",
 
