@@ -35,6 +35,7 @@ const renderItem = (item) => {
       <MediaCard
         source={item?.posters?.[0]}
         placeholderText={item.title}
+        onPress={() => router.push(`/series/${item.id}`)}
       />
   );
 }

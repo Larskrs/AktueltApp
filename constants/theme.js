@@ -38,6 +38,7 @@ const SIZES = {
 };
 const ASPECTS = {
   poster(multiplier=4) { return {width: (27*multiplier), height: (40*multiplier)}},
+  wideScreen(multiplier=4) { return {width: (16*multiplier), height: (9*multiplier)}},
 }
 
 const SHADOWS = {
