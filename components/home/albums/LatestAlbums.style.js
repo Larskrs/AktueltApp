@@ -8,10 +8,6 @@ const styles = StyleSheet.create({
     borderRadius: SIZES.xSmall,
     width: "100%",
     paddingTop: SIZES.large,
-    display: "flex",
-    flexDirection: "column",
-    columnGap: SIZES.xxSmall,
-    rowGap: SIZES.xxSmall,
   },
   title: {
     fontSize: SIZES.large,
@@ -20,14 +16,8 @@ const styles = StyleSheet.create({
     padding: SIZES.small,
   },
   contentContainer: {
-    rowGap: SIZES.xxSmall,
-    paddingBottom: 200,
-    flexGrow: 1,
-  },
-  image: {
-    width: "auto",
-    height: 200,
-    backgroundColor: COLORS.white,
+    columnGap: 8,
+    flex: 1,
   }
   
 });

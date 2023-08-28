@@ -1,20 +1,20 @@
 import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
 import React from 'react'
-import { View, Text, FlatList } from 'react-native'
+import { View, Text, FlatList, SafeAreaView, ScrollView } from 'react-native'
 import useFetch from '../../../hook/useFetch';
-import MediaCard from '../../common/cards/mediaCard/MediaCard';
+import AlbumCard from '../../common/cards/albumCard/AlbumCard';
 
-import styles from './LatestVideos.style'
+import styles from './LatestAlbums.style'
 
 const About = () => {
 
   const { data, isLoading, error, refresh} = useFetch(
-    `/media/series?allowedTypes=series,film`, {});
+    `/media/series?allowedTypes=album`, {});
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Nyeste Utgaver</Text>
+    <>
+      <Text style={styles.title}>Nyeste Album</Text>
       {!isLoading && <FlatList 
         renderItem={({item}) => renderItem(item)}
         data={data}
@@ -24,7 +24,7 @@ const About = () => {
         pagingEnabled
         bounces={true}
       /> }
-    </View>
+    </>
   )
 }
 
@@ -32,7 +32,7 @@ const renderItem = (item) => {
 
   const router = useRouter();
   return (
-      <MediaCard
+      <AlbumCard
         source={item?.posters?.[0]}
         placeholderText={item.title}
         onPress={() => router.push(`/series/${item.id}`)}

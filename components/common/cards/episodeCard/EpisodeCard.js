@@ -1,16 +1,18 @@
 
 import * as React from 'react';
 import { useRef, useState } from 'react';
-import { View, Text, TouchableOpacity, Button } from 'react-native';
+import { View, Text, TouchableOpacity, Pressable } from 'react-native';
 import { Image } from "react-native"
 import { Video, ResizeMode } from 'expo-av';
 import styles from './EpisodeCard.style.jsx'
+import { COLORS } from '../../../../constants';
 
 const MediaCard = ({
     title="",
     videoSource="",
+    posterSource="",
     onPress=() => {},
-
+    type="video",
     
 }) => {
 
@@ -35,31 +37,32 @@ const MediaCard = ({
                 placeholderContentFit="cover"
             /> */}
 
-            <Text style={styles.placeholder_title}>
-                {title}
-            </Text>
             <Video
                 
               ref={video}
-              style={styles.video}
+              style={[styles.video, {display: (type != 'video' ? "none" : "flex")}]}
               source={{
                 uri: videoSource,
               }}
               useNativeControls
               resizeMode={ResizeMode.CONTAIN}
               isLooping
+              posterSource={posterSource}
               onPlaybackStatusUpdate={status => setStatus(() => status)}
             />
 
+              <Text style={styles.placeholder_title}>
+                  {title}
+              </Text>
             <View style={styles.buttons}>
-                    <Button
-                      title={status.isPlaying ? 'Pause' : 'Play'}
+                    <Pressable
+                      style={styles.playButton}
                       onPress={() => {
                           status.isPlaying ? video.current.pauseAsync() : video.current.playAsync();
                           video.current.presentFullscreenPlayer()
                         }
                       }
-                    />
+                    ><Text style={{textAlign: "center", fontWeight: "700"}}>{status.isPlaying ? 'Pause' : 'Play'}</Text></Pressable>
                   </View>
         </TouchableOpacity>
     );

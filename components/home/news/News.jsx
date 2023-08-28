@@ -73,27 +73,6 @@ const News = () => {
         return () => clearInterval(interval)
       })
 
-      // useEffect(() => {
-
-      //   // if activeIndex === last index -> Jump back to first index
-      //   // else 
-
-      //   let interval = setInterval(() => {
-      //     if (activeIndex === data.length -1) {
-      //       slidesRef.current.scrollToIndex({
-      //         index: 0,
-      //         animation: true
-      //       })
-      //     } else {
-      //       slidesRef.current.scrollToIndex({
-      //         index: activeIndex + 1,
-      //         animation: true
-      //       })
-      //     }
-      //   }, 2000)
-      //   return () => clearInterval(interval)
-      // })
-
       const getItemLayout = (data, index) => ({
         length: width,
         offset: (width - (SIZES.medium*2)) * index,

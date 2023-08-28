@@ -8,7 +8,7 @@ import { StatusBar } from "expo-status-bar";
 
 import useFetch from "../hook/useFetch"
 
-import { News, LatestVideos, ScreenHeaderBtn } from "../components"
+import { News, LatestVideos, ScreenHeaderBtn, LatestAlbums } from "../components"
 
 const Home = () => {
     const router = useRouter();
@@ -41,6 +41,7 @@ const Home = () => {
 
                 <News />
                 <LatestVideos />
+                <LatestAlbums />
 
                 </View>
             </ScrollView>

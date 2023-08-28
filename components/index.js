@@ -3,6 +3,7 @@ import ScreenHeaderBtn from "./common/header/ScreenHeaderBtn";
 // home screen
 import News from "./home/news/News";
 import LatestVideos from "./home/latest/LatestVideos";
+import LatestAlbums from "./home/albums/LatestAlbums";
 
 // series screen
 import Episodes from "./series/episodes/episodes";
@@ -18,6 +19,7 @@ export {
   // Home Screen
   News,
   LatestVideos,
+  LatestAlbums,
   // Series Page
   Episodes,
 };

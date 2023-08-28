@@ -6,12 +6,16 @@ const styles = StyleSheet.create({
 
     container: {
         width: "auto",
-        // backgroundColor: COLORS.primary,
+        backgroundColor: 'rgba(0, 0, 0, 0.125)',
+        padding: SIZES.small,
+        borderRadius: SIZES.xSmall,
         overflow: "hidden",
         display: "flex",
         alignItems: "center",
+        justifyContent: "space-between",
         flexDirection: "row",
         columnGap: SIZES.small,
+        flex: 1,
     },
     image: {
         backgroundColor: '#0553',
@@ -23,16 +27,23 @@ const styles = StyleSheet.create({
     video: {
         backgroundColor: '#0553',
         zIndex: 2,
-        width: 150,
+        width: 125,
         aspectRatio: 16/9,
         borderRadius: SIZES.xSmall,
-        display: "none"
+        
     },
     placeholder_title: {
         color: COLORS.lightWhite,
         fontSize: SIZES.medium,
         zIndex: 1,
-        width: 150,
+        width: 200,
+        fontWeight: "700"
+    },
+    playButton: {
+        backgroundColor: COLORS.white,
+        padding: SIZES.small,
+        width: 75,
+        borderRadius: SIZES.small,
     }
   
 });
