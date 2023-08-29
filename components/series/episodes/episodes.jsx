@@ -4,7 +4,7 @@ import React, { useRef, useState } from 'react'
 import { View, Text, FlatList, SafeAreaView, Button, ScrollView } from 'react-native'
 import useFetch from '../../../hook/useFetch';
 import { EpisodeCard, MusicCard, SoundPlayer } from '../../';
-import * as Progress from "react-native-progress"
+import Slider from "react-native-slider"
 import styles from './episodes.style'
 import { ResizeMode, Video } from 'expo-av';
 import Animated from 'react-native-reanimated';
@@ -17,7 +17,7 @@ const Episodes = ({id}) => {
   }
 
   
-  const renderItem = (item, posterSource, type) => {
+  const renderItem = (item, posterSource, type, index) => {
     
     const router = useRouter();
     
@@ -32,6 +32,7 @@ const Episodes = ({id}) => {
          if (current == item.id) {
           setCurrent(null)
          } else {
+          setCurrentIndex(index)
           setCurrent(item)
          }
         }}
@@ -52,7 +53,9 @@ const Episodes = ({id}) => {
         );
       }
       
+
       const [current, setCurrent] = useState(null)
+      const [currentIndex, setCurrentIndex] = useState(null)
       const [songProgress, setSongProgress] = useState(0)
       const music = useRef(null)
       const [status, setStatus] = React.useState({});
@@ -67,17 +70,22 @@ const Episodes = ({id}) => {
           return (<Text>Laster inn side...</Text>)
         }
 
+    
 
         return (
           <Animated.View style={styles.container}>
+            <Text>Du lytter på {currentIndex}</Text>
             {current && (<>
             <Text>Du lytter på {current.title}</Text>
-            {songProgress != 0 && songProgress != NaN && <Progress.Bar 
-              progress={songProgress}
-              width={200}
-              /> }
+            <Slider 
+              value={songProgress}
+              thumbStyle={{backgroundColor: "white", display: "flex", height: 32, width: 6}}
+              minimumTrackTintColor="#fff"
+              maximumTrackTintColor="rgba(0, 0, 0, .25)"
+              thumbTintColor="rgba(0, 196, 239, 1)"
+            />
 
-            <Video
+            {current && <Video
                 ref={music}
                 style={[styles.video]}
                 source={{
@@ -85,16 +93,35 @@ const Episodes = ({id}) => {
                 }}
                 shouldPlay={true}
                 onLoad={() => {
+                  console.log("Started loading video source");
                   status.isPlaying ? music.current.pauseAsync() : music.current.playAsync();
                   // music.current.presentFullscreenPlayer()
                 }}
                 
                 useNativeControls
                 resizeMode={ResizeMode.CONTAIN}
-                isLooping
-                onPlaybackStatusUpdate={status => {setStatus(() => status); console.log((status.positionMillis/status.durationMillis).toFixed(2)); 
-                setSongProgress((status.positionMillis/status.durationMillis).toFixed(2))}}
-                /> 
+                
+                onPlaybackStatusUpdate={async status => {setStatus(() => status); 
+                let _progress = status.positionMillis/status.durationMillis
+                // console.log(_progress)
+                if(isNaN(_progress)){
+                  setSongProgress(0)
+                 }else{
+                  setSongProgress(_progress)
+                 }
+                 if (status.didJustFinish) {
+                  console.log("Song ended.")
+                    setSongProgress(0)
+                    setCurrent(null)
+                    setCurrentIndex(currentIndex + 1)
+                    setCurrent(data[currentIndex])
+                    console.log({file: current.file})
+                    console.log({source: music.current.source})
+                    
+                 }
+                }
+              }
+                /> }
               </>
               )}
       <Text style={styles.title}>{data.type == "album" ? "Sanger" : "Episoder"}</Text>
@@ -110,7 +137,7 @@ const Episodes = ({id}) => {
       /> } */}
 
     {!isLoading && <FlatList 
-        renderItem={({item}) => renderItem(item, data.posters[0], data.type)}
+        renderItem={(item) => renderItem(item.item, data.posters[0], data.type, item.index)}
         data={data.episodes}
         contentContainerStyle={styles.contentContainer}
         showsHorizontalScrollIndicator={false}
