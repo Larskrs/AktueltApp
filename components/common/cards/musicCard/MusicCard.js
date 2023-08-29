@@ -5,12 +5,14 @@ import { View, Text, TouchableOpacity, Pressable } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Image } from "react-native"
 import { Video, ResizeMode } from 'expo-av';
-import styles from './EpisodeCard.style.jsx'
+import styles from './MusicCard.style.jsx'
 import { COLORS } from '../../../../constants';
+import * as Progress from "react-native-progress"
 
 const MediaCard = ({
     id=0,
     title="",
+    onPress=null,
     videoSource="",
     posterSource="",
     type="video",
@@ -28,10 +30,7 @@ const MediaCard = ({
 
 
     return (
-        <TouchableOpacity style={styles.container} onPress={() => {
-          status.isPlaying ? video.current.pauseAsync() : video.current.playAsync();
-          video.current.presentFullscreenPlayer()
-        }}>
+        <TouchableOpacity style={styles.container} onPress={onPress}>
             {/* <Image
                 source={{uri: source}}
                 style={styles.image}
@@ -60,10 +59,13 @@ const MediaCard = ({
               style={[styles.image, {aspectRatio: 1/1}]}
               source={{uri: posterSource}}
             /> }
+            <View>
 
               <Text style={styles.placeholder_title}>
                   {title} {"\n"} {views}
               </Text>
+              
+            </View>
 
         </TouchableOpacity>
     );

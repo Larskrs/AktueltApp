@@ -58,19 +58,20 @@ const Home = () => {
                     showsVerticalScrollIndicator={false}
                     bounces={true}
                     contentOffset={200}
+                    
                     contentContainerStyle={{
                         height: height + 200,
                         position: "absolute",
                         top: 0,
                         left: 0,
                         flex: 1,
-                        backgroundColor: 'rgba(0, 0, 0, 0.5)', width: width, 
+                        width: width, 
                     }}
                     >
 
 
                 <View style={{
-                    top: 100,
+                    top: 0,
                     left: 0,
                     alignItems: "center",
                     padding: SIZES.medium,
