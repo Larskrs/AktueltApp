@@ -41,20 +41,6 @@ const MediaCard = ({
                 placeholderContentFit="cover"
             /> */}
 
-            <Video
-                
-              ref={video}
-              style={[styles.video, {display: (type == 'album' ? "none" : "flex")}]}
-              source={{
-                uri: videoSource,
-              }}
-              useNativeControls
-              resizeMode={ResizeMode.CONTAIN}
-              isLooping
-              posterSource={posterSource}
-              onPlaybackStatusUpdate={status => setStatus(() => status)}
-            />
-
             {type == "album" && <Image 
               style={[styles.image, {aspectRatio: 1/1}]}
               source={{uri: posterSource}}

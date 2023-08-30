@@ -74,9 +74,8 @@ const Episodes = ({id}) => {
 
         return (
           <Animated.View style={styles.container}>
-            <Text>Du lytter på {currentIndex}</Text>
             {current && (<>
-            <Text>Du lytter på {current.title}</Text>
+            <Text style={{color: "white", fontSize: 18}}>{current.title}</Text>
             <Slider 
               value={songProgress}
               thumbStyle={{backgroundColor: "white", display: "flex", height: 32, width: 6}}
